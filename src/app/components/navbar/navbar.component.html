@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #af2b1e;">
+  <a class="navbar-brand" routerLink="/main">
+    <img src="https://www.pngrepo.com/png/254129/50/forest-village.png"/>
+    ВЁСКА
+  </a>
+
+  <div class="collapse navbar-collapse text-uppercase" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/create" routerLinkActive="active">Лучшее</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/create" routerLinkActive="active">Новое</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/create" routerLinkActive="active">Категории</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav col-auto" *ngIf="auth.isAuth() else loggedIn">
+      <li class="nav-item">
+        <a routerLink="/profile" class="nav-link">{{auth.currentUser.username}}</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/login" class="nav-link" (click)="auth.out()">Выход</a>
+      </li> 
+    </ul>  
+  </div>
+</nav>
+
+<ng-template #loggedIn>
+  <ul class="navbar-nav col-auto">
+    <li class="nav-item">
+      <a routerLink="/login" routerLinkActive="active" class="nav-link">Вход</a>
+    </li>
+  </ul>
+</ng-template>

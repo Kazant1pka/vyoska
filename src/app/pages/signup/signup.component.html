@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container-wrapper container d-flex justify-content-center align-items-center">
+  <div class="form-wrapper text-center">
+    <h2 class="text-center">Регистрация</h2>
+    <form novalidate>
+      <div class="name-wrapper d-flex">
+        <div class="form-group first-name mr-2">
+          <input type="text" name="firstName" [(ngModel)] = "firstName" class="form-control" id="first-name-input" placeholder="Введите имя">
+        </div>
+        <div class="form-group last-name mr-2">
+          <input type="text" name="lastName" [(ngModel)] = "lastName" class="form-control" id="last-name-input" placeholder="Введите фамилию">
+        </div>
+        <div class="form-group father-name">
+          <input type="text" name="fatherName" [(ngModel)] = "fatherName" class="form-control" id="father-name-input" placeholder="Введите отчество">
+        </div>
+      </div> 
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Статус</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="subject" formControlName="subject">
+          <option value="Art">Студент</option>
+          <option value="Design">Преподаватель</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" [(ngModel)] = "user.email" class="form-control" id="email-input" placeholder="Электронная почта">
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" [(ngModel)] = "user.password" class="form-control" id="password-input" placeholder="Пароль">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="validateSign()">Регистрация</button>
+    </form>
+    <small><a routerLink="/login">Назад</a></small>
+  </div>
+</div>

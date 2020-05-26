@@ -1,0 +1,20 @@
+<div *ngIf="companies else noCompanies">
+    <div class="ml-1" *ngFor="let item of companies">
+      <div class="jumbotron w-100">
+        <div>
+          <span class="badge badge-primary mr-1 lead" *ngFor="let tag of item.tag">{{tag}}</span>
+        </div>
+        <small class="lead">{{item.creator}}</small>
+        <h1 class="display-4">{{item.title}}!</h1>
+        <small class="lead">{{item.startDate | date : 'd/M/y'}}</small>
+        <hr class="my-4">
+        <p>{{item.description.slice(0, 360)}} ...</p>
+        <a class="btn btn-success btn-lg" routerLink="/company" role="button" (click)="getID(item._id)">Читать полностью</a>
+      </div>
+</div>
+
+<ng-template #noCompanies>
+  <h1>Компаний нет</h1>
+</ng-template>
+
+

@@ -1,0 +1,179 @@
+<app-navbar></app-navbar>
+
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img src="{{auth.currentUser.photoUrl}}" alt="" />
+          <div class="file btn btn-lg btn-primary">
+            Загрузить фото
+            <input type="file" name="file" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            {{auth.currentUser.username}}
+          </h5>
+          <h6>
+            {{auth.currentUser.status}}
+          </h6>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Личные данные</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics"
+                aria-selected="false">Статистика</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Статьи</h3>
+        <div>
+          Написанных: {{auth.currentUser.createdArticle.length}}
+        </div>
+        <div>
+          Понравившихся: {{auth.currentUser.likedArticle.length}}
+        </div>
+        <div>
+          Добавленныe в закладки: {{auth.currentUser.marksArticle.length}}
+        </div>
+        <hr>
+        <div class="row">
+          <button class="col mr-2 btn btn-success" routerLink="/create" >
+            <h4>Написать статью</h4> <i class="fas fa-plus-circle fa-3x"></i>
+          </button>
+          <button class="col btn btn-success" data-toggle="modal" data-target="#exampleModal" (click)="getArticles()">
+            <h4>Изменить статью</h4><i class="far fa-edit fa-3x"></i>
+          </button>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ваши статьи</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-bordered">
+                  <thead class="table-success">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Заголовок</th>
+                      <th scope="col">Дата публикации</th>
+                      <th scope="col">Изменить</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of articles; index as i">
+                      <th scope="row">{{i + 1}}</th>
+                      <td>{{item.title}}</td>
+                      <td>{{item.startDate | date}}</td>
+                      <td><a routerLink="/edit" (click)="set(item._id)" data-dismiss="modal">Перейти</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Имя</label>
+              </div>
+              <div class="col-md-6">
+                <label type="text">{{auth.currentUser.username}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Электронный адрес</label>
+              </div>
+              <div class="col-md-6">
+                <label type="text">{{auth.currentUser.email}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Возраст</label>
+              </div>
+              <div class="col-md-6">
+                <label type="text">{{auth.currentUser.age}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Город</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{auth.currentUser.city}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Учреждение</label>
+              </div>
+              <div class="col-md-6">
+                <p (click)="getName(auth.currentUser.university)">{{auth.currentUser.university}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Статус в учреждении</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{auth.currentUser.grade}}</p>
+              </div>
+            </div>
+            <div class="">
+              <input type="submit" class="profile-edit-btn mb-2" name="btnAddMore" value="Редактировать" (click)="update()" />
+              <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Сохранить" (click)="update()" />
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab" (click)="getArticles()">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">№</th>
+                  <th scope="col">Заголовок</th>
+                  <th scope="col">Дата создания</th>
+                  <th scope="col">Рейтинг</th>
+                  <th scope="col">Понравилось</th>
+                  <th scope="col">Закладок</th>
+                  <th scope="col">Удалить</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of articles; index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td><a routerLink="/company" (click)="setCom(item._id)">{{item.title}}</a></td>
+                  <td>{{item.startDate | date : 'd/M/y'}}</td>
+                  <td>{{item.rating}}</td>
+                  <td>{{item.like}}</td>
+                  <td>{{item.bookmark}}</td>
+                  <td><a routerLink="/profile" (click)="delArticle(item._id)">Удалить</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

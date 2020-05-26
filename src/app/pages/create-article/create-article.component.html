@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div *ngIf="auth.currentUser else Block">
+  <div class="box d-flex justify-content-center align-items-center">
+    <div class="form-wrapper">
+      <h2 class="text-center">Режим автора</h2>
+      <form [formGroup]="createArticle" novalidate>
+        <div class="form-group">
+          <input type="text" name="title" formControlName="title" class="form-control" id="title-input" placeholder="Заголовок">
+          <!-- <div class="validation" *ngIf="createArticle.get('name').touched && createArticle.get('name').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div> -->
+        </div>
+        <div class="form-group">
+          <p>Оснавная часть</p>
+          <angular-markdown-editor formControlName="description" textareaId="editor1" rows="12" name="markdownText"
+            [(ngModel)]="markdownText">
+          </angular-markdown-editor>
+          <!-- <div class="validation"
+            *ngIf="createArticle.get('description').touched && createArticle.get('description').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div> -->
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Категория</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" name="category" formControlName="category">
+            <option value="Гуманитарные науки">Гуманитарные науки</option>
+            <option value="IT-сфера">IT-сфера</option>
+            <option value="Естественные науки">Естественные науки</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" name="tag" formControlName="tag" class="form-control" id="tag-input"
+            placeholder="Ключевые слова">
+          <!-- <div class="validation"
+            *ngIf="createArticle.get('tag').touched && createArticle.get('tag').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div> -->
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="createArticle.invalid"
+          (click)="validateCreate()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #Block>
+  <div class="container-wrapper container d-flex justify-content-center align-items-center">
+    <h1>Для доступа необходимо авторизоваться</h1>
+    <button class="btn btn-success ml-3" routerLink="/login">Перейти к авторизации</button>
+  </div>
+</ng-template>
+
+

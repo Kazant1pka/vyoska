@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<button class="col mr-2 btn btn-danger" routerLink="/profile" (click)="delArticle(article._id)" >
+  <h4>Удалить статью</h4> <i class="fas fa-plus-circle fa-3x"></i>
+</button>
+<div class=" container d-flex justify-content-center align-items-center">
+  <div class="form-wrapper">
+    <h2 class="text-center">Режим изменения</h2>
+    <form [formGroup]="editArticleForm" novalidate>
+      <div class="form-group">
+        <label for="title-input">Изменить заголовок</label>
+        <input type="text" name="title" formControlName="title" class="form-control" id="title-input">
+        <!-- <div class="validation" *ngIf="editArticleForm.get('title').touched && editArticleForm.get('title').invalid">
+          <small>Поле заполнено некоректно</small>
+        </div> -->
+      </div>
+
+      <div class="form-group">
+        <p>Основная часть</p>
+        <angular-markdown-editor formControlName="description" textareaId="editor1" rows="12" name="markdownText"
+          [(ngModel)]="markdownText">
+        </angular-markdown-editor>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Категория</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="category" formControlName="category">
+          <option value="Естественные науки">Естественные науки</option>
+          <option value="IT-сфера">IT-сфера</option>
+          <option value="Гумманитарные науки">Гумманитарные науки</option>
+        </select>
+      </div>
+      <p>Добавьте или удалите теги</p>
+      <div class="form-group">
+        <input type="text" name="tag" formControlName="tag" class="form-control" id="tag-input">
+        <!-- <div class="validation" *ngIf="editArticleForm.get('tag').touched && editArticleForm.get('tag').invalid">
+          <small>Поле заполнено некоректно</small>
+        </div> -->
+      </div>
+
+      <button type="submit" class="btn btn-success" routerLink="/article" [disabled]="editArticleForm.invalid"
+        (click)="validateEdit()">Submit</button>
+    </form>
+  </div>
+</div>

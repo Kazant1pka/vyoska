@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+<div class="container emp-profile">
+  <div class="img-fluid d-block w-50 border border-success">
+    <img src="{{institution.photoUrl}}" alt="" />
+  </div>
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Статьи</h3>
+        <div>
+          Написанных: {{institution.createdArticle.length}}
+        </div>
+        <div>
+          Понравившихся: {{institution.likedArticle.length}}
+        </div>
+        <div>
+          Добавленныe в закладки: {{institution.marksArticle.length}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            {{institution.name}}
+          </h5>
+          <h6>
+            {{institution.status}}
+          </h6>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Данные</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics"
+                aria-selected="false">Статистика</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="desc-tab" data-toggle="tab" href="#desc" role="tab" aria-controls="desc"
+                  aria-selected="false">Описание</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <hr>
+        <div class="row" *ngIf="this.auth.currentUser === institution.name">
+          <button class="col mr-2 btn btn-success" routerLink="/create" >
+            <h4>Написать статью</h4> <i class="fas fa-plus-circle fa-3x"></i>
+          </button>
+          <button class="col btn btn-success" routerLink="/edit">
+            <h4>Изменить статью</h4><i class="far fa-edit fa-3x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Наименование</label>
+              </div>
+              <div class="col-md-6">
+                <label type="text">{{institution.name}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Электронный адрес</label>
+              </div>
+              <div class="col-md-6">
+                <label type="text">{{institution.email}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Дата основания</label>
+              </div>
+              <div class="col-md-6">
+                <label type="text">{{institution.foundation}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Город</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{institution.city}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Количество участников</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{part}}</p>
+              </div>
+            </div>
+            <div class="">
+              
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">№</th>
+                  <th scope="col">Должность</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>{{institution.part | async}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="desc" role="tabpanel" aria-labelledby="desc-tab">
+            {{institution.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div>
+    <span class="badge badge-primary mr-1 lead" *ngFor="let tag of article.tag">{{tag}}</span>
+  </div>
+  <h1>{{article.title}}</h1>
+  <!-- <div class="row float-right" *ngIf="auth.currentUser">
+    <app-rating max=5 [ratedCount]="avrat" (onRating)=onRating($event)></app-rating>
+    <div *ngIf="avrat else noRating">{{avrat}}</div>
+  </div> -->
+  <div *ngIf="auth.currentUser">
+    <small *ngIf="auth.currentUser._id === article.creator">
+      <button routerLink="/editArticle">Редактировать</button>
+    </small>
+  </div>
+  <small class="create">{{article.creator}}, {{article.startDate | date : 'd/M/y'}}</small>
+  <hr class="my-4">
+  <p>{{article.description}}</p>
+  <div class="row d-flex">
+    <div class="col">
+      <p>Категория проекта: <b>{{article.category}}</b></p>
+    </div>
+
+  </div>
+  <nav class="mt-2">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+        aria-controls="nav-home" aria-selected="true">Рейтинг</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-comment" role="tab"
+        aria-controls="nav-comment" aria-selected="false">Комментарии</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <!-- <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div markdown [data]="company.description"></div>
+    </div> -->
+    <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+      <app-comments></app-comments>
+    </div>
+  </div>
+</div>
+<ng-template #noRating>
+  <div>Будь первым</div>
+</ng-template>
+<router-outlet></router-outlet>

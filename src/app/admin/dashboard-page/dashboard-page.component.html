@@ -1,0 +1,21 @@
+<table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Профиль</th>
+        <th scope="col">Удалить</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let item of users; index as i;">
+        <th scope="row">{{i+1}}</th>
+        <td>{{item.username}}</td>
+        <td><a routerLink="/company" (click)="setCom(item._id)">{{item.status}}</a></td>
+        <td><a routerLink="/editCompany" (click)="setCom(item._id)">Профиль</a></td>
+        <td><a routerLink="/profile"(click)="delCompany(item._id)">Удалить пользователя</a></td>
+      </tr>
+    </tbody>
+  </table>
+<router-outlet></router-outlet>

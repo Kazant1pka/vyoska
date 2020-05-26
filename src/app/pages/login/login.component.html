@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="container-wrapper container d-flex justify-content-center align-items-center">
+  <div class="form-wrapper text-center ">
+    <h2 class="text-center">Введите данные</h2>
+    <form [formGroup]="loginForm" novalidate>
+      <div class="form-group">
+        <input type="email" name="email" formControlName="email" class="form-control" id="email-input"
+          placeholder="Электронная почта">
+        <div class="validation" *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid">
+          <small aria-placeholder="asdfsafas">Введён неверный маил</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" formControlName="password" class="form-control" id="password-input"
+          placeholder="Пароль">
+        <div class="validation" *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid">
+          <small>Введён неверный пароль</small>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid"
+        (click)="validateLogin()">Вход</button>
+        <div>
+          <small><a class="btn btn-success btn-sm mt-5" routerLink="/signup">Регистрация</a></small>
+        </div>
+      <h3 class="text-center">Либо зайдите через</h3>
+    </form>
+    <div class="btn-group">
+      <button class="btn"><i class="fab fa-facebook-square fa-3x" (click)="submitServiceTwitter()"></i></button>
+      <button class="btn"><i class="fab fa-google fa-3x" (click)="submitServiceGoogle()"></i></button>
+    </div>
+
+  </div>
+</div>
